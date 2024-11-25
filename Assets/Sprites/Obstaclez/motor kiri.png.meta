@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      motor kiri_0: 8286032798913932420
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

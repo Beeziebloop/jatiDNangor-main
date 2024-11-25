@@ -3,6 +3,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.Scripting.APIUpdating;
 
 public class CharMovement : MonoBehaviour
@@ -13,10 +14,24 @@ public class CharMovement : MonoBehaviour
     private bool isMoving = false;
     public LogicScript logic;
     public bool playerIsAlive = true;
+
+    private Animator animator;
+    private UnityEngine.Vector2 movement;
+    private Rigidbody2D rb;
+    private const string horizontal = "Horizontal";
+    private const string vertical = "Vertical";
+    private const string lastHorizontal = "LastHorizontal";
+    private const string lastVertical = "LastVertical";
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         logic = GameObject.FindGameObjectWithTag("logic").GetComponent<LogicScript>();
+    }
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -51,6 +66,15 @@ public class CharMovement : MonoBehaviour
                 StartCoroutine(Move(UnityEngine.Vector2.right));
             }
         }
+
+        animator.SetFloat(horizontal, movement.x);
+        animator.SetFloat(vertical, movement.y);
+
+        if(movement != UnityEngine.Vector2.zero)
+        {
+            animator.SetFloat(lastHorizontal, movement.x);
+            animator.SetFloat(lastVertical, movement.y);
+        }
     }
  
 
@@ -74,6 +98,7 @@ public class CharMovement : MonoBehaviour
 
         isMoving = false;
     }
+
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("obstacle"))

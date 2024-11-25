@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      truk kanan_0: -5217746078774959059
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
